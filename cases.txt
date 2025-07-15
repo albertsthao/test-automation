@@ -1,0 +1,11 @@
+When nothing is typed into the search bar, does a message appear saying "No recent searches"
+
+When something has been searched recently, do those recent options show up?
+
+Does the playwright button on the left of the screen bring you back to the home page of the website? 
+
+When clicking on the Docs button, does it go to the correct docs page showing the neccessary articles.
+
+Does the top right Github button bring you to the right url, "https://github.com/microsoft/playwright"
+
+Does the correct installation instructions show when selecting Node.Js, Python, Java? 
