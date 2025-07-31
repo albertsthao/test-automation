@@ -98,3 +98,37 @@ test('Another similar test for the discord button at the top', async ({ page }) 
   const aboutSection = await newTab.locator(".colorStandard-1nZ0G7.size18-2TfY0C.textMedium-3Ic-hz");
   await expect(aboutSection).toContainText("This server is for the Playwright community to ask questions to other community members and our Playwright ambassadors. We also have channels for articles, videos and conference/meetup talks where you can find more content created by the community. Use this channel to share any content you have created our found.Voice channels can be used to chat with other community members.Events... coming soon");
 });
+
+test('Does the correct installation instructions show when selecting Node.Js', async ({ page }) => {
+  await page.goto('https://playwright.dev/');
+
+  const docsButton = page.getByText('Docs');
+  await docsButton.click();
+
+  const platformButton = await page.locator('.navbar__item.dropdown.dropdown--hoverable');
+  await platformButton.hover();
+  
+  const nodeJsLink = await page.locator('.dropdown__link.undefined.dropdown__link--active')
+  await nodeJsLink.click();
+  
+  // await expect(nodeJsLink).("https://playwright.dev/docs/intro");
+
+
+});
+
+test('Similar test, does the correct installation instructions show when selecting Python', async ({ page }) => {
+  await page.goto('https://playwright.dev/');
+
+  const docsButton = page.getByText('Docs');
+  await docsButton.click();
+
+  const platformButton = await page.locator('.navbar__item.dropdown.dropdown--hoverable');
+  await platformButton.hover();
+
+  const pythonLink = await page.locator('.dropdown__link').filter({ hasText: 'Python'});
+  await pythonLink.click();
+
+
+});
+
+// test('Similar test, does the correct instructions show for ')

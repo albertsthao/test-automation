@@ -6,7 +6,8 @@ Does the playwright button on the top left of the screen bring you back to the h
 
 When clicking on the Docs button, does it go to the correct docs page showing the neccessary articles. DONE 
 
-Does the top right Github button bring you to the right url, "https://github.com/microsoft/playwright"
+Does the top right Github button bring you to the right url, "https://github.com/microsoft/playwright" DONE
+another similar test was done after.
 
 Does the correct installation instructions show when selecting Node.Js, Python, Java? 
 
