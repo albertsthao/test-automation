@@ -1,18 +1,20 @@
-When nothing is typed into the search bar, does a message appear saying "No recent searches" DONE
+When nothing is typed into the search bar, does a message appear saying "No recent searches" (DONE)
 
-When something has been searched recently, do those recent options show up? DONE
+When something has been searched recently, do those recent options show up? (DONE)
 
-Does the playwright button on the top left of the screen bring you back to the home page of the website? DONE
+Does the playwright button on the top left of the screen bring you back to the home page of the website? (DONE)
 
-When clicking on the Docs button, does it go to the correct docs page showing the neccessary articles. DONE 
+When clicking on the Docs button, does it go to the correct docs page showing the neccessary articles. (DONE) 
 
-Does the top right Github button bring you to the right url, "https://github.com/microsoft/playwright" DONE
+Does the top right Github button bring you to the right url, "https://github.com/microsoft/playwright" (DONE)
 another similar test was done after.
 
-Does the correct installation instructions show when selecting Node.Js, Python, Java? 
+Does the correct installation instructions show when selecting Node.Js, Python, Java? (DONE) 
 
-When using the docs page, does the list on the right function correctly? Clicking on the elements works corrently.
+When using the docs page, does the list on the right function correctly? Clicking on the elements works corrently. (DONE)
 
 At the bottom of reading an article does it have the previous and next article button,
     Also does it lead you to the correct next article?
     If its the very first article it should not have a previous button, only next
+
+    Does the light and dark mode button work correctly?
