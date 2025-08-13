@@ -246,3 +246,26 @@ test('Similar test, does the list on the left function correctly with the API bu
   await expect(page).toHaveURL('https://playwright.dev/docs/api/class-electronapplication');
   
 });
+
+test('At the bottom of reading an article does it shouldnt have the previous article button if your on the very first one', async ({ page }) => {
+  await page.goto('https://playwright.dev/');
+
+  const docsButton = page.getByText('Docs');
+  await docsButton.click();
+
+  const hiddenElement = page.locator('.pagination-nav__link.pagination-nav__link--prev');
+  await expect(hiddenElement).not.toBeVisible();
+
+});
+
+test('Similar test, does the next button at the bottom work properly?', async ({ page }) => {
+  await page.goto('https://playwright.dev/');
+
+  const docsButton = page.getByText('Docs');
+  await docsButton.click();
+
+  await page.locator('.docusaurus-mt-lg.pagination-nav').getByRole('link', {name: 'Next'}).click();
+  await expect(page).toHaveURL('https://playwright.dev/docs/writing-tests');
+
+
+});

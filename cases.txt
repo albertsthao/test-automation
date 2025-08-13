@@ -13,8 +13,7 @@ Does the correct installation instructions show when selecting Node.Js, Python, 
 
 When using the docs page, does the list on the right function correctly? Clicking on the elements works corrently. (DONE)
 
-At the bottom of reading an article does it have the previous and next article button,
-    Also does it lead you to the correct next article?
+At the bottom of reading an article does it have the previous and next article button, (DONE)
     If its the very first article it should not have a previous button, only next
 
     Does the light and dark mode button work correctly?
