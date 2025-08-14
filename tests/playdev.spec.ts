@@ -242,7 +242,6 @@ test('Similar test, does the next button at the bottom work properly?', async ({
   await utilityPage.goToPlaywrightHomepage();
 
   await utilityPage.Docsbutton.click();
-
   await page.locator('.docusaurus-mt-lg.pagination-nav').getByRole('link', {name: 'Next'}).click();
   await expect(page).toHaveURL('https://playwright.dev/docs/writing-tests');
 
