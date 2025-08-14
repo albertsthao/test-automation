@@ -1,5 +1,5 @@
 import { platform } from 'os';
-import { UtilityPage } from './page/utility-page';
+import { UtilityPage } from './Page/Utility-page';
 import { test, expect } from '@playwright/test';
 
 var utilityPage
@@ -9,21 +9,20 @@ test.beforeEach(async ({ page }) => {
 });
 
 test('Should have search button on landing page', async ({ page }) => {
-    await page.goto('https://playwright.dev/');
+  await utilityPage.goToPlaywrightHomepage();
 
-    await expect(utilityPage.Searchbutton).toHaveAttribute('type', 'button');
-
+  await expect(utilityPage.Searchbutton).toHaveAttribute('type', 'button');
 });
 
 test('No recent searches in the doc help search', async ({ page }) => {
-  await page.goto('https://playwright.dev/');
+  await utilityPage.goToPlaywrightHomepage();
   await utilityPage.Searchbutton.click();
 
   await expect(utilityPage.SearchHelp).toHaveText("No recent searches");
 });
 
 test('Recent searches show up properly', async ({ page }) => {
-  await page.goto('https://playwright.dev/');
+  await utilityPage.goToPlaywrightHomepage();
   await utilityPage.Searchbutton.click();
 
   await page.locator('.DocSearch-Input').pressSequentially('Introduction', { delay: 100 });;
@@ -41,23 +40,19 @@ test('Recent searches show up properly', async ({ page }) => {
 
 
 test('Top left playwright button sends you to hompage', async ({ page }) => {
-  await page.goto('https://playwright.dev/');
-
-  const docsButton = page.getByText('Docs');
-  await docsButton.click();
-
+  await utilityPage.goToPlaywrightHomepage();
+  await utilityPage.Docsbutton.click();
 
   const playWrightHomeButton = await page.locator('.navbar__brand');
   await playWrightHomeButton.click();
-
+ 
   await expect(page).toHaveURL('https://playwright.dev/');
 });
 
 test('Clicking on docs sends you to the page with all the documents', async ({ page }) => {
-  await page.goto('https://playwright.dev/');
+  await utilityPage.goToPlaywrightHomepage();
 
-  const docsButton = page.getByText('Docs');
-  await docsButton.click();
+  await utilityPage.Docsbutton.click();
 
   const docsList = await page.locator('.theme-doc-sidebar-menu.menu__list');
   await expect(docsList).toContainText[('Getting Started')];
@@ -72,7 +67,7 @@ test('Clicking on docs sends you to the page with all the documents', async ({ p
 });
 
 test('Does the top right Github button bring you to the right url, https://github.com/microsoft/playwright', async ({ page }) => {
-  await page.goto('https://playwright.dev/');
+  await utilityPage.goToPlaywrightHomepage();
   const newTabPromise = page.waitForEvent("popup");
   
   await page.getByRole("link", { name: "GitHub repository" }).click();
@@ -87,7 +82,7 @@ test('Does the top right Github button bring you to the right url, https://githu
 });
 
 test('Another similar test for the discord button at the top', async ({ page }) => {
-  await page.goto('https://playwright.dev/');
+  await utilityPage.goToPlaywrightHomepage();
   const newTabPromise = page.waitForEvent("popup");
 
   await page.getByRole("link", {name: "Discord server"}).click();
@@ -101,13 +96,11 @@ test('Another similar test for the discord button at the top', async ({ page }) 
 });
 
 test('Does the correct installation doc instructions show when selecting Node.js', async ({ page }) => {
-  await page.goto('https://playwright.dev/');
+  await utilityPage.goToPlaywrightHomepage();
 
-  const docsButton = page.getByText('Docs');
-  await docsButton.click();
+  await utilityPage.Docsbutton.click();
 
-  const platformButton = await page.locator('.navbar__item.dropdown.dropdown--hoverable');
-  await platformButton.hover();
+  await utilityPage.Platformbutton.hover();
   
   await page.getByRole('link', { name: 'Node.js' }).click();
   await expect(page).toHaveURL('https://playwright.dev/docs/intro');
@@ -115,13 +108,11 @@ test('Does the correct installation doc instructions show when selecting Node.js
 });
 
 test('Similar test, does the correct installation doc instructions show when selecting Python', async ({ page }) => {
-  await page.goto('https://playwright.dev/');
+  await utilityPage.goToPlaywrightHomepage();
 
-  const docsButton = page.getByText('Docs');
-  await docsButton.click();
+  await utilityPage.Docsbutton.click();
 
-  const platformButton = await page.locator('.navbar__item.dropdown.dropdown--hoverable');
-  await platformButton.hover();
+  await utilityPage.Platformbutton.hover();
 
   await page.getByRole('link', { name: 'Python'}).click();
   await expect(page).toHaveURL('https://playwright.dev/python/docs/intro');
@@ -131,11 +122,9 @@ test('Similar test, does the correct installation doc instructions show when sel
 test('Similar test, does the correct doc instructions show for Java', async ({ page }) => {
   await page.goto('https://playwright.dev/')
 
-  const docsButton = page.getByText('Docs');
-  await docsButton.click();
+  await utilityPage.Docsbutton.click();
 
-  const platformButton = await page.locator('.navbar__item.dropdown.dropdown--hoverable');
-  await platformButton.hover();
+  await utilityPage.Platformbutton.hover();
 
   await page.locator('.navbar__item.dropdown.dropdown--hoverable').getByRole('link', { name: 'Java' }).click();
   await expect(page).toHaveURL('https://playwright.dev/java/docs/intro');
@@ -145,11 +134,9 @@ test('Similar test, does the correct doc instructions show for Java', async ({ p
 test('Similar test, does the correct doc instructions show for .NET', async ({ page }) => {
   await page.goto('https://playwright.dev/')
 
-  const docsButton = page.getByText('Docs');
-  await docsButton.click();
+  await utilityPage.Docsbutton.click();
 
-  const platformButton = await page.locator('.navbar__item.dropdown.dropdown--hoverable');
-  await platformButton.hover();
+  await utilityPage.Platformbutton.hover();
 
   await page.locator('.navbar__item.dropdown.dropdown--hoverable').getByRole('link', {name: '.NET'}).click();
   await expect(page).toHaveURL('https://playwright.dev/dotnet/docs/intro')
@@ -157,13 +144,12 @@ test('Similar test, does the correct doc instructions show for .NET', async ({ p
 });
 
 test('Similar test, does the correct API instructions show for Node.js', async ({ page }) => {
-  await page.goto('https://playwright.dev/');
+  await utilityPage.goToPlaywrightHomepage();
 
   // const apiButton = page.getByText('API');
   const apiButton = await page.locator('.theme-layout-navbar-left.navbar__items').getByRole('link', {name: 'API'}).click();
   
-  const platformButton = await page.locator('.navbar__item.dropdown.dropdown--hoverable');
-  await platformButton.hover();
+  await utilityPage.Platformbutton.hover();
 
   await page.locator('.navbar__item.dropdown.dropdown--hoverable').getByRole('link', {name: 'Node.js'}).click();
   await expect(page).toHaveURL('https://playwright.dev/docs/api/class-playwright');
@@ -171,12 +157,11 @@ test('Similar test, does the correct API instructions show for Node.js', async (
 });
 
 test('Similar text, does the correct API instructions show for Python', async ({ page }) => {
-  await page.goto('https://playwright.dev/');
+  await utilityPage.goToPlaywrightHomepage();
 
   await page.locator('.theme-layout-navbar-left.navbar__items').getByRole('link', {name: 'API'}).click();
 
-  const platformButton = await page.locator('.navbar__item.dropdown.dropdown--hoverable');
-  await platformButton.hover();
+  await utilityPage.Platformbutton.hover();
 
   await page.locator('.navbar__item.dropdown.dropdown--hoverable').getByRole('link', {name: 'Python'}).click();
   await expect(page).toHaveURL('https://playwright.dev/python/docs/api/class-playwright');
@@ -184,12 +169,11 @@ test('Similar text, does the correct API instructions show for Python', async ({
 });
 
 test('Similar test, does the correct API instructions show for Java', async ({ page }) => {
-  await page.goto('https://playwright.dev/');
+  await utilityPage.goToPlaywrightHomepage();
 
   await page.locator('.theme-layout-navbar-left.navbar__items').getByRole('link', {name: 'API'}).click();
 
-  const platformButton = await page.locator('.navbar__item.dropdown.dropdown--hoverable');
-  await platformButton.hover();
+  await utilityPage.Platformbutton.hover();
 
   await page.locator('.navbar__item.dropdown.dropdown--hoverable').getByRole('link', {name: 'Java'}).click();
   await expect(page).toHaveURL('https://playwright.dev/java/docs/api/class-playwright');
@@ -197,12 +181,11 @@ test('Similar test, does the correct API instructions show for Java', async ({ p
 });
 
 test('Similar text, does the correct API instructions show for .NET', async ({ page }) => {
-  await page.goto('https://playwright.dev/');
+  await utilityPage.goToPlaywrightHomepage();
 
   await page.locator('.theme-layout-navbar-left.navbar__items').getByRole('link', {name: 'API'}).click();
 
-  const platformButton = await page.locator('.navbar__item.dropdown.dropdown--hoverable');
-  await platformButton.hover();
+  await utilityPage.Platformbutton.hover();
 
   await page.locator('.navbar__item.dropdown.dropdown--hoverable').getByRole('link', {name: '.NET'}).click();
   await expect(page).toHaveURL('https://playwright.dev/dotnet/docs/api/class-playwright');
@@ -212,10 +195,9 @@ test('Similar text, does the correct API instructions show for .NET', async ({ p
 
 test('When using the docs page, does the list on the right and left function correctly? Clicking on the elements works correctly?', async ({ page }) => {
 //Testing the link 'running and debugging' for the list on the left side 
-  await page.goto('https://playwright.dev/');
+  await utilityPage.goToPlaywrightHomepage();
 
-  const docsButton = page.getByText('Docs');
-  await docsButton.click();
+  await utilityPage.Docsbutton.click();
 
   await page.locator('.theme-doc-sidebar-item-category.theme-doc-sidebar-item-category-level-1.menu__list-item').getByRole('link', {name: 'Running and debugging tests'}).click();
   await expect(page).toHaveURL('https://playwright.dev/docs/running-tests');
@@ -224,10 +206,9 @@ test('When using the docs page, does the list on the right and left function cor
 
 test('Similar test, does the list on the right and left function correctly? Clicking on the elements works correctly?', async ({ page }) => {
 //Testing the link 'running and debugging' for the list on the left side, for docs button
-  await page.goto('https://playwright.dev/');
+  await utilityPage.goToPlaywrightHomepage();
 
-  const docsButton = page.getByText('Docs');
-  await docsButton.click();
+  await utilityPage.Docsbutton.click();
 
   await page.locator('.theme-doc-sidebar-item-category.theme-doc-sidebar-item-category-level-1.menu__list-item').getByRole('link', {name: 'Running and debugging tests'}).click();
 
@@ -238,7 +219,7 @@ test('Similar test, does the list on the right and left function correctly? Clic
 
 test('Similar test, does the list on the left function correctly with the API button selected', async ({ page }) => {
 // Testing the link on the right 'ELectronApplication' API button
-  await page.goto('https://playwright.dev/');
+  await utilityPage.goToPlaywrightHomepage();
 
   const apiButton = await page.locator('.theme-layout-navbar-left.navbar__items').getByRole('link', {name: 'API'}).click();
 
@@ -248,10 +229,9 @@ test('Similar test, does the list on the left function correctly with the API bu
 });
 
 test('At the bottom of reading an article does it shouldnt have the previous article button if your on the very first one', async ({ page }) => {
-  await page.goto('https://playwright.dev/');
+  await utilityPage.goToPlaywrightHomepage();
 
-  const docsButton = page.getByText('Docs');
-  await docsButton.click();
+  await utilityPage.Docsbutton.click();
 
   const hiddenElement = page.locator('.pagination-nav__link.pagination-nav__link--prev');
   await expect(hiddenElement).not.toBeVisible();
@@ -259,10 +239,9 @@ test('At the bottom of reading an article does it shouldnt have the previous art
 });
 
 test('Similar test, does the next button at the bottom work properly?', async ({ page }) => {
-  await page.goto('https://playwright.dev/');
+  await utilityPage.goToPlaywrightHomepage();
 
-  const docsButton = page.getByText('Docs');
-  await docsButton.click();
+  await utilityPage.Docsbutton.click();
 
   await page.locator('.docusaurus-mt-lg.pagination-nav').getByRole('link', {name: 'Next'}).click();
   await expect(page).toHaveURL('https://playwright.dev/docs/writing-tests');
