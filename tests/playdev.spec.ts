@@ -25,7 +25,7 @@ test('Recent searches show up properly', async ({ page }) => {
   await utilityPage.goToPlaywrightHomepage();
   await utilityPage.Searchbutton.click();
 
-  await page.locator('.DocSearch-Input').pressSequentially('Introduction', { delay: 100 });;
+  await page.locator('.DocSearch-Input').pressSequentially('Introduction', { delay: 100 });
   await page.keyboard.press('Enter');
 
   const introduction = await page.locator('#introduction')
@@ -146,9 +146,7 @@ test('Similar test, does the correct doc instructions show for .NET', async ({ p
 test('Similar test, does the correct API instructions show for Node.js', async ({ page }) => {
   await utilityPage.goToPlaywrightHomepage();
 
-  // const apiButton = page.getByText('API');
-  const apiButton = await page.locator('.theme-layout-navbar-left.navbar__items').getByRole('link', {name: 'API'}).click();
-  
+  await utilityPage.APIButton.click();
   await utilityPage.Platformbutton.hover();
 
   await page.locator('.navbar__item.dropdown.dropdown--hoverable').getByRole('link', {name: 'Node.js'}).click();
@@ -159,8 +157,7 @@ test('Similar test, does the correct API instructions show for Node.js', async (
 test('Similar text, does the correct API instructions show for Python', async ({ page }) => {
   await utilityPage.goToPlaywrightHomepage();
 
-  await page.locator('.theme-layout-navbar-left.navbar__items').getByRole('link', {name: 'API'}).click();
-
+  await utilityPage.APIButton.click();
   await utilityPage.Platformbutton.hover();
 
   await page.locator('.navbar__item.dropdown.dropdown--hoverable').getByRole('link', {name: 'Python'}).click();
@@ -171,8 +168,7 @@ test('Similar text, does the correct API instructions show for Python', async ({
 test('Similar test, does the correct API instructions show for Java', async ({ page }) => {
   await utilityPage.goToPlaywrightHomepage();
 
-  await page.locator('.theme-layout-navbar-left.navbar__items').getByRole('link', {name: 'API'}).click();
-
+  await utilityPage.APIButton.click();
   await utilityPage.Platformbutton.hover();
 
   await page.locator('.navbar__item.dropdown.dropdown--hoverable').getByRole('link', {name: 'Java'}).click();
@@ -182,13 +178,15 @@ test('Similar test, does the correct API instructions show for Java', async ({ p
 
 test('Similar text, does the correct API instructions show for .NET', async ({ page }) => {
   await utilityPage.goToPlaywrightHomepage();
-
-  await page.locator('.theme-layout-navbar-left.navbar__items').getByRole('link', {name: 'API'}).click();
+  
+  await utilityPage.APIButton.click();
 
   await utilityPage.Platformbutton.hover();
 
   await page.locator('.navbar__item.dropdown.dropdown--hoverable').getByRole('link', {name: '.NET'}).click();
+  await page.waitForTimeout(250);
   await expect(page).toHaveURL('https://playwright.dev/dotnet/docs/api/class-playwright');
+  
 
 });
 
@@ -221,8 +219,7 @@ test('Similar test, does the list on the left function correctly with the API bu
 // Testing the link on the right 'ELectronApplication' API button
   await utilityPage.goToPlaywrightHomepage();
 
-  const apiButton = await page.locator('.theme-layout-navbar-left.navbar__items').getByRole('link', {name: 'API'}).click();
-
+  const apiButton = await utilityPage.APIButton.click();
   await page.locator('.theme-doc-sidebar-item-category.theme-doc-sidebar-item-category-level-2.menu__list-item').getByRole('link', {name: 'ElectronApplication'}).click();
   await expect(page).toHaveURL('https://playwright.dev/docs/api/class-electronapplication');
   
