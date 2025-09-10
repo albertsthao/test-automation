@@ -1,5 +1,5 @@
 import { platform } from 'os';
-import { UtilityPage } from './Page/Utility-Page';
+import { UtilityPage } from './Page/UtilityPage';
 import { test, expect } from '@playwright/test';
 
 var utilityPage
